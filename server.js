@@ -8,12 +8,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Thư mục chứa file tĩnh (HTML, CSS, JS, hình ảnh)
-app.use(express.static(path.join(__dirname, 'src')));
+// Serve file tĩnh từ thư mục src/
+const staticPath = path.join(__dirname, 'src');
+app.use(express.static(staticPath));
 
 // Route trả index.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'src', 'index.html'));
+    res.sendFile(path.join(staticPath, 'index.html'));
 });
 
 // Route nhận dữ liệu survey từ form
@@ -21,23 +22,26 @@ app.post('/submit-survey', (req, res) => {
     const surveyData = req.body;
     console.log('Survey received:', surveyData);
 
-    // Lưu dữ liệu vào file survey.json (nếu chưa có thì tạo)
     const filePath = path.join(__dirname, 'survey.json');
     let existingData = [];
 
-    if (fs.existsSync(filePath)) {
-        const jsonData = fs.readFileSync(filePath);
-        existingData = JSON.parse(jsonData);
+    try {
+        if (fs.existsSync(filePath)) {
+            const jsonData = fs.readFileSync(filePath, 'utf8');
+            existingData = JSON.parse(jsonData);
+        }
+
+        existingData.push(surveyData);
+        fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2), 'utf8');
+
+        res.send('Cảm ơn bạn đã gửi survey!');
+    } catch (err) {
+        console.error('Error saving survey:', err);
+        res.status(500).send('Lỗi khi lưu survey!');
     }
-
-    existingData.push(surveyData);
-    fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
-
-    // Trả phản hồi
-    res.send('Cảm ơn bạn đã gửi survey!');
 });
 
-// Khởi chạy server trên port Render cung cấp
+// Khởi chạy server trên port Render
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server đang chạy trên port ${port}`);
