@@ -9,11 +9,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Thư mục chứa file tĩnh (HTML, CSS, JS, hình ảnh)
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'src')));
 
 // Route trả index.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'src', 'index.html'));
 });
 
 // Route nhận dữ liệu survey từ form
