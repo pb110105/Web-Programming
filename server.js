@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve file tĩnh từ thư mục src/
-const staticPath = path.join(__dirname, 'src');
+const staticPath = path.join(__dirname, 'web');
 app.use(express.static(staticPath));
 
 // Route trả index.html
