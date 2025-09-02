@@ -1,0 +1,82 @@
+/* The styles for the elements */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;;
+    height: 100vh;
+    margin: 0;
+}
+h1 {
+    font-size: 150%;
+    color: teal;
+    margin-bottom: .5em;
+}
+h2 {
+    font-size: 130%;
+    color: teal;
+    margin-bottom: .5em;
+}
+label {
+    float: left;
+    width: 7em;
+    margin-bottom: 0.5em;
+    padding-top: .3em;
+    font-weight: bold;
+}
+input[type="text"], input[type="email"] {  /* An attribute selector */
+    width: 15em;
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+}
+fieldset {
+    width: 400px;
+    height: auto;
+    border: 2px solid #444;
+    border-radius: 10px;
+    padding: 20px 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    transition: all 0.25s ease-in-out;
+
+}
+fieldset:hover {
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+    border-color: darkred;
+}
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: darkred;
+}
+span {
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+}
+br {
+    clear: both;
+}
+
+/* The styles for the classes */
+.pad_top {
+    padding-top: 0.25em;
+}
+.margin_left {
+    margin-left: 0.5em;
+}
+
+/* The styles for a table */
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    text-align: left;
+    padding: .5em;
+}
+.right {
+    text-align: right;
+}
